@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
+<script type="text/javascript" 	src="jquery.mobile/jquery.mobile-1.1.0.js"></script>
+
+
+
+var substr;
+
+
+
+<style>
+table {
+	text-align: left;
+	font-size: 12px;
+	font-family: verdana;
+	background: #c0c0c0;
+}
+
+table thead tr,table tfoot tr {
+	background: #c0c0c0;
+}
+
+table tbody tr {
+	background: #f0f0f0;
+}
+
+td,th {
+	border: 1px solid white;
+}
+</style>
+
+
+
+
+
+<script type="text/javascript">
+$(function()
+        {
+            $("#tableId tr td").live("click",function()
+            {
+    
+    			console.log("??????????????????????????????");
+                   alert($(this).html());
+    			//$(this).text()
+
+            });
+        });
+
+</script>
+
+</head>
+
+<body>
+
+
+
+	<div data-role="page" id="about" data-theme="a"
+		data-add-back-btn="true">
+
+		<form id="chartForm">
+
+
+			<div data-role="header" align="center">
+				<img border="0" src="../../jquery.mobile/images/toplogo.png" />
+
+			</div>
+
+			<div data-role="fieldcontain" align="vertical">
+				<label id="UserDetail"></label>
+
+				<script type="text/javascript">
+		$("#UserDetail").text(userName+currentTime); 
+	
+				</script>
+
+
+
+
+
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+
+						<input id="nse" name="exch_type" type="radio" value="ASE"
+							checked="checked" /> <label for="nse" style="width: 125px;">ASE</label>
+
+						<input id="bse" name="exch_type" type="radio" value="BSE" /> <label
+							for="bse" style="width: 125px;">BSE</label>
+					</fieldset>
+
+				</div>
+
+			</div>
+			<div align="center">
+				<iframe name="chartId" id="chartId"
+					src="http://myDomain.asp/qwe&Hg=150&Wd=300"
+					scrolling="yes"></iframe>
+			</div>
+			<div align="center">
+				<h3>Market Watch</h3>
+			</div>
+			<div id="wrapper" align="center"></div>
+
+		</form>
+
+		<script type="text/javascript">
+		
+		$('input[name=exch_type]').change(function()
+		{
+    		var radio_val = $('input[name=exch_type]:checked').val();
+    		
+    		if (radio_val=="ASE")
+    		{
+    			console.log("NNNNNNNNNNNNSSSSSSSSEEEEEEEE");
+    			$("#chartId").attr("src", "myDomain.asp/qwe&Hg=150&Wd=300 "); 
+
+    		}
+    		
+    		else if (radio_val=="BSE")
+    		{
+    			console.log("BBBBBBBBBBBSSSSSSSSEEEEEEEE");
+    			
+    			$("#chartId").attr("src", "http://myDomain.asp/qwe&Hg=150&Wd=300"); 
+    		}
+    		//alert('Radio Value: '+radio_val);
+		});
+		   
+		
+		
+		</script>
+
+		<script type="text/javascript">
+
+	
+	console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		$.get('http://MyDomainDetails.asp', function(data)
+		{    
+    		console.log("#####################"+data);
+    		
+    		var up = new Image();
+    		var down = new Image();
+    		
+			up.src = "../../jquery.mobile/images/up.png";
+			down.src = "../../jquery.mobile/images/down.png"
+			
+    		substr = data.split('$');
+			
+      		//alert(substr.length);
+      		
+      		//var theader = '<table border="1">\n';
+      		//<table id="auditOverview" border="1">
+      		var theader = '<table border="1" id=\"tableId\">\n';
+
+			
+      		
+		    var tbody = '';
+      		    		
+    		for (var out = 1;out<substr.length-1;out++)
+    		{
+    			//alert(substr[out]);
+    			
+    			tbody += '<tr>';
+    		
+	    		var pra = substr[out].split('|^');
+	    		//alert('pra.length is: '+pra.length);
+	    		for (var i=0;i<pra.length-1;i++)
+	    		{
+	    			tbody += '<td>';
+	    			
+	    			if (pra[i]=="Red")
+	    			{
+	    				//pra[i].append("<img id='theImg' src='../../jquery.mobile/images/down.png'/>");
+	    				pra[i] = "<img id='theImg' src='../../jquery.mobile/images/down.png'/>";
+	    				
+	    				
+	    			}
+	    			else if (pra[i]=="Green")
+	    			{
+	    				pra[i] = "<img id='theImg' src='../../jquery.mobile/images/up.png'/>";
+
+	    			}
+		            tbody += pra[i];	
+		            tbody += '</td>' 
+		           
+	    		}
+	    		tbody += '</tr>\n';
+	    		
+	    	}	    
+    		
+    		var tfooter = '</table>';
+		    document.getElementById('wrapper').innerHTML = theader + tbody + tfooter;       
+        	
+    	});    	
+    	
+    	
+   		
+		
+
+</script>
+
+
+		<div data-role="footer" data-theme="a" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+                    <li><a href="MainMenu.html" >Menu</a></li>
+                    <li><a href="../../index.html" >Logout</a></li>
+      
+                </ul> 
+			</div>
+		</div>
+
+
+	</div>
+
+
+</body>
+
+
+
+</body>
+</html>
